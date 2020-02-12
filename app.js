@@ -1,4 +1,7 @@
 let container = document.getElementById('dice-container'); //sets the variable container to the square container div in the html
+let diceSum = document.getElementById('sum-dice');  //button that adds all current dice and displays and alert of the sum
+let sqButton = document.getElementById('sq-button'); //assigns sqButton to the html button "sq-button"
+let rerollButton = document.getElementById('re-button');
 
 var diceArray = [];
 
@@ -26,15 +29,18 @@ class Square {
     dieValue() {
         this.div.innerText = randomVal(1, 7);
     }
+    updateColor () {
+        let randomColor = `rgb(${randomVal(0,255)}, ${randomVal(0,255)}, ${randomVal(0,255)})`  //calls on randomVal function to pick a number from 0-255 which then inturn will give us a rgb color value
+        // chooses a random color
+        this.div.style.backgroundColor = randomColor;  //sets the random color to the background of the div that is being created inside square container div
+    }
 
 }
 
 //Buttons-----------------------------
 
-let sqButton = document.getElementById('sq-button'); //assigns sqButton to the html button "sq-button"
 sqButton.addEventListener('click', insertSquare);       //adds an event listener that when clicked executes the insert square function
 
-let rerollButton = document.getElementById('re-button');
 rerollButton.addEventListener('click', () => {
     diceArray.forEach(die => {
         console.log(die);
@@ -43,7 +49,6 @@ rerollButton.addEventListener('click', () => {
 });
 console.log(diceArray)
 
-let diceSum = document.getElementById('sum-dice');  //button that adds all current dice and displays and alert of the sum
 diceSum.addEventListener('click', () => {
     let diceVal = [];
     diceArray.forEach((val) => {
